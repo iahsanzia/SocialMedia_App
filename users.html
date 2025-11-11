@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users Directory</title>
+    <link rel="stylesheet" href="users.css" />
+  </head>
+  <body>
+    <!-- Header Bar -->
+    <div class="header-bar">
+      <div class="bar-left">
+        <img class="logo" id="logo" src="utilities/Background/logo.png" />
+      </div>
+      <div class="bar-right">
+        <ul>
+          <li>
+            <svg
+              id="home-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              height="58px"
+              viewBox="0 -960 960 960"
+              width="58px"
+              fill="#e3e3e3"
+            >
+              <path
+                d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"
+              />
+            </svg>
+          </li>
+
+          <li>
+            <svg
+              id="users-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              height="56px"
+              viewBox="0 -960 960 960"
+              width="56px"
+              fill="#e3e3e3"
+            >
+              <path
+                d="M160-40v-80h640v80H160Zm0-800v-80h640v80H160Zm320 400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm70-80h500q-45-56-109-88t-141-32q-77 0-141 32t-109 88Z"
+              />
+            </svg>
+          </li>
+          <li>
+            <svg
+              id="logout-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              height="56px"
+              viewBox="0 -960 960 960"
+              width="56px"
+              fill="#e3e3e3"
+            >
+              <path
+                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"
+              />
+            </svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>Users Directory</h1>
+
+      <div class="table-container">
+        <table id="users-table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>City</th>
+              <th>Company</th>
+              <th>Website</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+
+      <div id="todos-section" class="todos-section" style="display: none">
+        <h2 id="todos-title">Todos for User</h2>
+        <button id="close-todos" class="close-btn">Close</button>
+
+        <div class="todos-stats">
+          <span id="todos-completed">Completed: 0</span>
+          <span id="todos-pending">Pending: 0</span>
+          <span id="todos-total">Total: 0</span>
+        </div>
+
+        <div class="table-container">
+          <table id="todos-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="todos-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="users.js"></script>
+  </body>
+</html>

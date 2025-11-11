@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feed</title>
+    <link rel="stylesheet" href="feed.css" />
+  </head>
+  <body>
+    <div class="header-bar">
+      <div class="bar-left">
+        <img class="logo" id="logo" src="utilities/Background/logo.png" />
+      </div>
+      <div class="bar-right">
+        <ul>
+          <li>
+            <svg
+              id="home-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              height="58px"
+              viewBox="0 -960 960 960"
+              width="58px"
+              fill="#e3e3e3"
+            >
+              <path
+                d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"
+              />
+            </svg>
+          </li>
+
+          <li>
+            <svg
+              id="users-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              height="56px"
+              viewBox="0 -960 960 960"
+              width="56px"
+              fill="#e3e3e3"
+            >
+              <path
+                d="M160-40v-80h640v80H160Zm0-800v-80h640v80H160Zm320 400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm70-80h500q-45-56-109-88t-141-32q-77 0-141 32t-109 88Z"
+              />
+            </svg>
+          </li>
+          <li>
+            <svg
+              id="logout-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              height="56px"
+              viewBox="0 -960 960 960"
+              width="56px"
+              fill="#e3e3e3"
+            >
+              <path
+                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"
+              />
+            </svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="left-sidebar">
+        <div class="sidebar-links">
+          <a href=""><img src="utilities/Background/news.png" />ALBUMS</a>
+          <a href=""><img src="utilities/Background/friends.png" />USERS</a>
+          <a href=""><img src="utilities/Background/upload.png" />POST</a>
+          <a href=""><img src="utilities/Background/logout.png" />LOGOUT</a>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div
+          class="write-post-container"
+          id="write-post-trigger"
+          style="cursor: pointer"
+        >
+          <div class="user-profile">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="54px"
+              viewBox="0 -960 960 960"
+              width="54px"
+              fill="#3486eb"
+            >
+              <path
+                d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"
+              />
+            </svg>
+            <div>
+              <p id="current-user-name">Anonymous</p>
+              <small>Public</small>
+            </div>
+          </div>
+          <div class="post-input-trigger">
+            <input
+              type="text"
+              placeholder="What's on Your Mind?....."
+              readonly
+            />
+          </div>
+        </div>
+
+        <div id="posts-container"></div>
+      </div>
+      <!-- <div class="right-sidebar"></div> -->
+    </div>
+
+    <div id="post-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Create Post</h2>
+          <span class="close-modal">&times;</span>
+        </div>
+
+        <div class="modal-body">
+          <div class="user-profile">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="54px"
+              viewBox="0 -960 960 960"
+              width="54px"
+              fill="#3486eb"
+            >
+              <path
+                d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"
+              />
+            </svg>
+            <div>
+              <p id="modal-user-name">Anonymous</p>
+              <small>Public</small>
+            </div>
+          </div>
+
+          <div class="post-input-container">
+            <input type="text" id="post-title" placeholder="Post Title..." />
+            <textarea
+              id="post-body"
+              rows="5"
+              placeholder="What's on Your Mind?....."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="cancel-post" class="btn-cancel">Cancel</button>
+          <button id="submit-post" class="btn-submit">Post</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Copyright 2025- Socialbook</p>
+    </div>
+    <script src="feed.js" defer></script>
+  </body>
+</html>
