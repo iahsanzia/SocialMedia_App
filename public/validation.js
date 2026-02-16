@@ -5,7 +5,7 @@ const emailInput = document.getElementById("email-input");
 const passwordInput = document.getElementById("password-input");
 const confirmPasswordInput = document.getElementById("confirm-password-input");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   let errors = [];
@@ -15,17 +15,15 @@ form.addEventListener("submit", (e) => {
       nameInput.value,
       emailInput.value,
       passwordInput.value,
-      confirmPasswordInput.value
+      confirmPasswordInput.value,
     );
 
     if (errors.length === 0) {
-      const user = new User(
-        nameInput.value.charAt(0).toUpperCase() + nameInput.value.slice(1),
-        emailInput.value,
-        passwordInput.value
-      );
-      const saved = saveUser(user);
+      const name =
+        nameInput.value.charAt(0).toUpperCase() + nameInput.value.slice(1);
+      const saved = await saveUser(name, emailInput.value, passwordInput.value);
       if (saved) {
+        alert("Registration successful! Please login.");
         window.location.href = "login.html";
         return;
       } else {
@@ -37,7 +35,8 @@ form.addEventListener("submit", (e) => {
     errors = getLoginFormErrors(emailInput.value, passwordInput.value);
 
     if (errors.length === 0) {
-      if (loginUser(emailInput.value, passwordInput.value)) {
+      const loggedIn = await loginUser(emailInput.value, passwordInput.value);
+      if (loggedIn) {
         console.log("Login Successfully");
         window.location.href = "feed.html";
       } else {
@@ -50,6 +49,7 @@ form.addEventListener("submit", (e) => {
 
   if (errors.length > 0) {
     console.log(errors);
+    alert(errors.join("\n"));
   }
 });
 
@@ -59,7 +59,7 @@ function getSignupFormErrors(name, email, password, confirmPassword) {
   [nameInput, emailInput, passwordInput, confirmPasswordInput].forEach(
     (input) => {
       input.parentElement.classList.remove("incorrect");
-    }
+    },
   );
 
   if (!name || name.trim().length < 2) {
@@ -112,42 +112,54 @@ function getLoginFormErrors(email, password) {
   return errors;
 }
 
-function saveUser(user) {
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-  if (users.some((u) => u.email === user.email)) {
-    alert("Email is already registered");
+async function saveUser(name, email, password) {
+  try {
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      return true;
+    } else {
+      alert(data.message);
+      return false;
+    }
+  } catch (error) {
+    console.error("Registration error:", error);
+    alert("Server error during registration");
     return false;
   }
-  users.push(user);
-  localStorage.setItem("users", JSON.stringify(users));
-  //   console.log("Starting fetch...");
-  //   try {
-  //     const response = await fetch(
-  //       "https://jsonplaceholder.typicode.com/todos/1"
-  //     );
-  //     const json = await response.json();
-  //     console.log("Fetched data:", json);
-  //   } catch (error) {
-  //     console.error("Fetch failed:", error);
-  //   }
-
-  return true;
 }
 
-function loginUser(email, password) {
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-  const user = users.find((u) => u.email === email && u.password === password);
-  if (user) {
-    localStorage.setItem("currentUser", JSON.stringify(user));
-    return true;
-  }
-  return false;
-}
+async function loginUser(email, password) {
+  try {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-class User {
-  constructor(name, email, password) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
+    const data = await response.json();
+
+    if (data.success) {
+      // Store user info in localStorage
+      localStorage.setItem("currentUser", JSON.stringify(data.user));
+      return true;
+    } else {
+      alert(data.message);
+      return false;
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    alert("Server error during login");
+    return false;
   }
 }
